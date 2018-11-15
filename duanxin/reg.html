@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<form action="reg_ok.php" method="post" onsubmit="return valid()">
+		<table>
+			<tr>
+				<td>用户名</td>
+				<td><input type="text" name="username"></td>
+			</tr>
+			<tr>
+				<td>密码</td>
+				<td><input type="password" name="password"></td>
+			</tr>
+			<tr>
+				<td>号码</td>
+				<td><input type="text" name="phone"></td>
+			</tr>
+			<tr>
+				<td>验证码</td>
+				<td><input type="text" name="code"></td>
+			</tr>
+			<tr>
+				<td><input type="button" value="发送验证码" name="sendCode"></td>
+				<td><input type="submit" value="注册"></td>
+			</tr>
+		
+		</table>
+	</form>
+</body>
+</html>
+<script src="jquery-1.10.2.js"></script>
+<script>
+	$(function(){
+        $("#sendCode").on('click',function(){
+        	$.ajax({
+        		url:'sms/SendTemplateSMS.php',
+        		type:'get',
+        		dataType:'json',
+        		data:{'phone':phone},
+        		success:function(data){
+
+        		}
+        	})
+        })
+	})
+	function valid()
+	{
+		var username = $('username').val();
+		if ($username=='')
+		 {
+		 	alert('用户名不能为空');
+		 	return false;
+		 }else
+		 {
+		 	return true;
+		 }
+	}
+</script>
